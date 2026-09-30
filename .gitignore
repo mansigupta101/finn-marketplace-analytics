@@ -25,3 +25,5 @@ analysis/results/rec_eval_*_lists.csv
 analysis/recommender_results.ipynb
 .virtual_documents/
 recommender/old_run_slate_check.py
+
+recommender/cache/
