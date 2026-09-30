@@ -1,0 +1,51 @@
+version: 2
+
+# Real-data marts. Everything here comes from FINN's recorded data; nothing is simulated.
+
+models:
+  - name: mart_position_ctr
+    description: >
+      Click-through rate by display position, per interaction type and slate size.
+      Uses only slates without a removed item. Compare positions within the same slate size.
+    columns:
+      - name: interaction_type
+        data_tests: [not_null]
+      - name: slate_size
+        description: Number of listings shown in the slate.
+        data_tests: [not_null]
+      - name: display_position
+        description: 1 for the first listing in the slate.
+        data_tests: [not_null]
+      - name: exposures
+        description: Number of times a listing was shown at this position.
+      - name: clicks
+        description: Number of times the listing at this position was clicked.
+      - name: click_through_rate
+        description: clicks / exposures.
+
+  - name: mart_search_vs_recs
+    description: Search results compared with recommendations, one row per interaction type.
+    columns:
+      - name: interaction_type
+        data_tests: [unique, not_null]
+      - name: slate_click_rate
+        description: Share of slates in which the buyer clicked a listing.
+      - name: avg_clicked_position
+        description: Average position of the clicked listing, in slates without a removed item.
+      - name: unknown_listing_share
+        description: Share of listings shown whose identity is missing in FINN's data.
+      - name: removed_item_share
+        description: Share of slates with one item removed from the recorded list.
+
+  - name: mart_category_ctr
+    description: >
+      Click-through rate by main category, per interaction type. Listings with a missing
+      identity are grouped as UNKNOWN.
+    columns:
+      - name: interaction_type
+        data_tests: [not_null]
+      - name: main_category
+        description: For example BAP (general merchandise), MOTOR, REAL_ESTATE, or UNKNOWN.
+        data_tests: [not_null]
+      - name: click_through_rate
+        description: clicks / exposures.

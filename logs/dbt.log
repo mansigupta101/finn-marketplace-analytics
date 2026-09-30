@@ -1,0 +1,18 @@
+[0m23:03:21.967769 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x103573d30>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x104a5bc40>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x104a5b1f0>]}
+
+
+============================== 23:03:21.970079 | 700bcd32-d7b9-4e8e-8741-1bb94801fa6d ==============================
+[0m23:03:21.970079 [info ] [MainThread]: Running with dbt=1.10.23
+[0m23:03:21.970341 [debug] [MainThread]: running dbt with arguments {'log_path': 'logs', 'empty': 'False', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'target_path': 'None', 'invocation_command': 'dbt build --profiles-dir .', 'version_check': 'True', 'indirect_selection': 'eager', 'profiles_dir': '.', 'fail_fast': 'False', 'log_format': 'default', 'log_cache_events': 'False', 'use_experimental_parser': 'False', 'introspect': 'True', 'no_print': 'None', 'use_colors': 'True', 'cache_selected_only': 'False', 'partial_parse': 'True', 'send_anonymous_usage_stats': 'True', 'write_json': 'True', 'printer_width': '80', 'warn_error': 'None', 'static_parser': 'True', 'debug': 'False', 'quiet': 'False'}
+[0m23:03:21.970527 [info ] [MainThread]: This version of dbt is deprecated and no longer receives regular patches, including for known bugs. We recommend upgrading to a newer supported version of dbt: https://docs.getdbt.com/docs/dbt-versions
+[0m23:03:21.970675 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'deprecated_version_invocation', 'label': '700bcd32-d7b9-4e8e-8741-1bb94801fa6d', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x103573d30>]}
+[0m23:03:21.970963 [error] [MainThread]: Encountered an error:
+Runtime Error
+  No dbt_project.yml found at expected path /Users/mansi/Documents/Projects/finn-marketplace-analytics/dbt_project.yml
+  Verify that each entry within packages.yml (and their transitive dependencies) contains a file named dbt_project.yml
+  
+[0m23:03:21.972387 [debug] [MainThread]: Resource report: {"command_name": "build", "command_success": false, "command_wall_clock_time": 0.038630333, "process_in_blocks": "0", "process_kernel_time": 0.121054, "process_mem_max_rss": "100220928", "process_out_blocks": "0", "process_user_time": 0.543585}
+[0m23:03:21.972583 [debug] [MainThread]: Command `dbt build` failed at 23:03:21.972537 after 0.04 seconds
+[0m23:03:21.972734 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x103573d30>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x104a5b520>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x104a5be50>]}
+[0m23:03:21.972876 [debug] [MainThread]: Flushing usage events
+[0m23:03:22.415635 [debug] [MainThread]: An error was encountered while trying to flush usage events

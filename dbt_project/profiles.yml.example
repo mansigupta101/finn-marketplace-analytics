@@ -1,0 +1,29 @@
+# Copy to profiles.yml in this folder (it is not committed) and run dbt with --profiles-dir .
+# Credentials come from environment variables, the same ones as in .env.
+#
+#   dbt build --target dev    builds into the DEV database
+#   dbt build --target prod   builds into the PROD database (what Power BI reads)
+
+finn_marketplace_analytics:
+  target: dev
+  outputs:
+    dev:
+      type: snowflake
+      account: "{{ env_var('SNOWFLAKE_ACCOUNT') }}"
+      user: "{{ env_var('SNOWFLAKE_USER') }}"
+      password: "{{ env_var('SNOWFLAKE_PASSWORD') }}"
+      role: "{{ env_var('SNOWFLAKE_ROLE', 'FINN_ROLE') }}"
+      warehouse: "{{ env_var('SNOWFLAKE_WAREHOUSE', 'FINN_WH') }}"
+      database: DEV
+      schema: analytics
+      threads: 4
+    prod:
+      type: snowflake
+      account: "{{ env_var('SNOWFLAKE_ACCOUNT') }}"
+      user: "{{ env_var('SNOWFLAKE_USER') }}"
+      password: "{{ env_var('SNOWFLAKE_PASSWORD') }}"
+      role: "{{ env_var('SNOWFLAKE_ROLE', 'FINN_ROLE') }}"
+      warehouse: "{{ env_var('SNOWFLAKE_WAREHOUSE', 'FINN_WH') }}"
+      database: PROD
+      schema: analytics
+      threads: 4

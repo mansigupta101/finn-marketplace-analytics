@@ -1,0 +1,69 @@
+version: 2
+
+sources:
+  - name: finn_slates
+    description: >
+      Real FINN.no slate data, a random sample of users, flattened by
+      pipeline/load_finn_data.py. Item id 0 is padding and is removed during loading.
+      Item id 1 is the special "no click" item.
+    database: RAW
+    schema: FINN_SLATES
+    tables:
+      - name: interactions
+        description: One row per user per interaction step (one slate shown, one response).
+        columns:
+          - name: user_id
+            data_tests: [not_null]
+          - name: interaction_step
+            description: Order of the interaction for the user, 0 to 19. There are no timestamps.
+            data_tests: [not_null]
+          - name: interaction_type_code
+            description: 0 undefined, 1 search, 2 recommendation.
+            data_tests:
+              - not_null
+              - accepted_values:
+                  arguments:
+                    values: [0, 1, 2]
+                    quote: false
+          - name: clicked_item_id
+            description: The item clicked. 1 means the buyer clicked nothing.
+            data_tests: [not_null]
+          - name: click_slot_index
+            description: Slot of the clicked item in the slate array, starting at 0.
+          - name: slate_length
+            description: Number of slots in the slate, including the no-click item.
+
+      - name: exposures
+        description: One row per item slot shown in a slate.
+        columns:
+          - name: user_id
+            data_tests: [not_null]
+          - name: interaction_step
+            data_tests: [not_null]
+          - name: slot_index
+            description: Slot in the slate array, starting at 0.
+            data_tests: [not_null]
+          - name: item_id
+            data_tests: [not_null]
+
+      - name: items
+        description: One row per item.
+        columns:
+          - name: item_id
+            data_tests: [not_null, unique]
+          - name: item_group_code
+            description: Item group (main category, subcategory and county combined).
+            data_tests: [not_null]
+
+      - name: item_groups
+        columns:
+          - name: item_group_code
+            data_tests: [not_null, unique]
+          - name: item_group_name
+            description: For example "BAP,antiques,Trøndelag". The first word is the main category.
+
+      - name: interaction_types
+        columns:
+          - name: interaction_type_code
+            data_tests: [not_null, unique]
+          - name: interaction_type_name

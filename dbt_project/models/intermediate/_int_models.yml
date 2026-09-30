@@ -1,0 +1,21 @@
+version: 2
+
+models:
+  - name: int_slates
+    description: >
+      One row per slate, with the number of listings shown, the position of the click, and
+      whether one item was removed from the recorded list (has_removed_item). Position
+      analysis uses only slates where has_removed_item is false.
+    columns:
+      - name: slate_id
+        data_tests: [unique, not_null]
+      - name: recorded_extra_slots
+        description: Recorded slate length minus filled slots. FINN's data only contains 0 or 1.
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: [0, 1]
+                quote: false
+      - name: clicked_display_position
+        description: Position of the clicked listing. Null when there was no click or the clicked item was removed.

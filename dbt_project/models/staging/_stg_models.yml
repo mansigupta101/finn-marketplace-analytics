@@ -1,0 +1,48 @@
+version: 2
+
+models:
+  - name: stg_interactions
+    description: One row per slate shown to a buyer, with the buyer's response.
+    columns:
+      - name: slate_id
+        description: User id and interaction step, for example "12345-3".
+        data_tests: [unique, not_null]
+      - name: interaction_type
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ["search", "recommendation", "unknown"]
+      - name: has_click
+        description: False when the buyer clicked nothing in the slate.
+        data_tests: [not_null]
+      - name: clicked_item_id
+        description: The clicked listing. Null when the buyer clicked nothing.
+
+  - name: stg_exposures
+    description: One row per listing shown in a slate. The "no click" item is excluded.
+    columns:
+      - name: slate_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_interactions')
+                field: slate_id
+      - name: item_id
+        data_tests: [not_null]
+      - name: is_unknown_item
+        description: True when the listing's identity is missing in FINN's data (item id 2).
+      - name: display_position
+        description: 1 for the first listing in the slate, 2 for the second, and so on.
+        data_tests: [not_null]
+
+  - name: stg_items
+    description: One row per item, with main category, subcategory and county.
+    columns:
+      - name: item_id
+        data_tests: [unique, not_null]
+      - name: item_group_name
+        data_tests: [not_null]
+      - name: main_category
+        description: For example BAP (general merchandise), MOTOR, REAL_ESTATE. Null for special items.
