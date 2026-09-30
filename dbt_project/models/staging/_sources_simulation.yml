@@ -1,0 +1,52 @@
+version: 2
+
+sources:
+  - name: simulation
+    description: >
+      SIMULATED data for the recommended-listing boost experiment, written by
+      pipeline/simulate_boost.py following docs/ab_test_protocol.md. Nothing in these tables is
+      a finding about FINN. The ground-truth table is deliberately not declared here: the
+      analysis must not read it, and it is used only by the validation step in
+      analysis/evaluate_experiment.py.
+    database: RAW
+    schema: SIMULATION
+    tables:
+      - name: experiment_assignments
+        description: One row per eligible buyer, with the buyer's group.
+        columns:
+          - name: user_id
+            data_tests: [unique, not_null]
+          - name: variant
+            data_tests:
+              - not_null
+              - accepted_values:
+                  arguments:
+                    values: ["boost_on", "boost_off"]
+
+      - name: boosted_listings
+        description: One row per boosted listing.
+        columns:
+          - name: item_id
+            data_tests: [unique, not_null]
+
+      - name: simulated_clicks
+        description: >
+          One row per recommendation slate in scope, with the simulated click in the buyer's own
+          group. The clicked listing and position are null when there was no click.
+        columns:
+          - name: user_id
+            data_tests: [not_null]
+          - name: interaction_step
+            data_tests: [not_null]
+          - name: variant
+            data_tests: [not_null]
+          - name: clicked_position
+            description: Display position of the clicked listing as the buyer saw it.
+
+      - name: simulated_contacts
+        description: One row per simulated seller contact.
+        columns:
+          - name: user_id
+            data_tests: [not_null]
+          - name: item_id
+            data_tests: [not_null]

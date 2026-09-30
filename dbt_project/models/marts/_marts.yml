@@ -49,3 +49,20 @@ models:
         data_tests: [not_null]
       - name: click_through_rate
         description: clicks / exposures.
+
+  - name: mart_experiment_buyers
+    description: >
+      SIMULATED. One row per eligible buyer in the recommended-listing boost experiment, with the
+      per-buyer totals every metric in docs/ab_test_protocol.md is built from. The listings shown
+      are real; the clicks and contacts are simulated.
+    columns:
+      - name: user_id
+        data_tests: [unique, not_null]
+      - name: variant
+        data_tests: [not_null]
+      - name: slates
+        description: Recommendation slates in the experiment.
+      - name: boosted_exposures
+        description: Times a boosted listing was shown.
+      - name: other_exposures
+        description: Times an identified listing that is not boosted was shown.

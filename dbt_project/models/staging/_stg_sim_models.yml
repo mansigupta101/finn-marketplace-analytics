@@ -1,0 +1,34 @@
+version: 2
+
+# SIMULATED data only. See docs/ab_test_protocol.md.
+
+models:
+  - name: stg_sim_assignments
+    description: One row per eligible buyer in the boost experiment, with the group.
+    columns:
+      - name: user_id
+        data_tests: [unique, not_null]
+      - name: variant
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ["boost_on", "boost_off"]
+
+  - name: stg_sim_clicks
+    description: One row per recommendation slate in the experiment, with the simulated click.
+    columns:
+      - name: slate_id
+        data_tests:
+          - unique
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('int_slates')
+                field: slate_id
+
+  - name: stg_sim_contacts
+    description: One row per simulated seller contact.
+    columns:
+      - name: item_id
+        data_tests: [not_null]
