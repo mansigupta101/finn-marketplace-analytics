@@ -1,0 +1,10 @@
+version: 2
+
+sources:
+  - name: recommender
+    description: Top-10 lists written by the Python recommender (recommender/write_scores.py).
+    database: RAW
+    schema: RECOMMENDER
+    tables:
+      - name: scores
+        description: One row per model, buyer and recommended listing.

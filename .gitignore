@@ -18,3 +18,10 @@ dbt_project/profiles.yml
 .ipynb_checkpoints/
 logs/
 dbt_project/.user.yml
+
+
+recommender/cache/recommender/cache/
+analysis/results/rec_eval_*_lists.csv
+analysis/recommender_results.ipynb
+.virtual_documents/
+recommender/old_run_slate_check.py

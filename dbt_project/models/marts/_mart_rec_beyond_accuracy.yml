@@ -1,0 +1,12 @@
+version: 2
+
+models:
+  - name: mart_rec_beyond_accuracy
+    description: Catalogue coverage and popularity concentration of each model's top-10 lists.
+    columns:
+      - name: model
+        data_tests: [not_null]
+      - name: buyers_scored
+        data_tests: [not_null]
+      - name: catalogue_coverage
+        data_tests: [not_null]
