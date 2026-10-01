@@ -3,7 +3,7 @@
 How buyers on FINN move from seeing a listing to clicking it, how a change to that journey can be
 measured reliably, and whether a recommender model beats simple baselines on real clicks.
 
-Two kinds of data, kept strictly apart:
+Two kinds of data were used, kept strictly apart:
 
 - **Real data.** The FINN.no slate dataset: which listings buyers were shown in search results and
   recommendations, and which listing they clicked. Findings from this data are findings about FINN.
