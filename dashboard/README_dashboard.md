@@ -20,14 +20,9 @@ python analysis/export_dashboard_data.py
 
 ## Setup
 
-1. Download **Tableau Public** from https://public.tableau.com and create a free account.
-2. Open it and choose **Connect → To a File → Text file**, then open
-   `dashboard/data/real_search_vs_recs.csv`.
-3. Add the other three files as separate data sources: **Data → New Data Source → Text file**, one
-   file at a time. Do not join them.
-4. Colours used throughout: **Search `#2a78d6`** (blue), **Recommendations `#eb6834`** (orange).
-   In any sheet with `Slate Type` on Color, click the colour legend → **Edit Colors** and set them
-   once; Tableau remembers them for the field.
+Colours used throughout: **Search `#2a78d6`** (blue), **Recommendations `#eb6834`** (orange).
+In any sheet with `Slate Type` on Color, click the colour legend → **Edit Colors** and set them once; 
+Tableau remembers them for the field.
 
 Rates in the files are fractions (0.807 = 80.7%). To show them as percentages, right-click the field
 → **Default Properties → Number Format → Percentage**.
