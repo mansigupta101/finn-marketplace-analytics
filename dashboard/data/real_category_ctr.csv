@@ -1,0 +1,14 @@
+interaction_type,slate_type,main_category,exposures,clicks,click_through_rate,show_in_chart
+recommendation,Recommendations,REAL_ESTATE,1613806,97177,0.060216,True
+recommendation,Recommendations,JOB,254284,12106,0.047608,True
+search,Search,MOTOR,2895888,287688,0.099344,True
+recommendation,Recommendations,BOAT,380082,27888,0.073374,True
+search,Search,BAP,2594508,268866,0.103629,True
+search,Search,REAL_ESTATE,3152348,365482,0.11594,True
+recommendation,Recommendations,MOTOR,1728151,110358,0.063859,True
+search,Search,UNKNOWN,2092645,0,0.0,False
+recommendation,Recommendations,UNKNOWN,1043954,0,0.0,False
+recommendation,Recommendations,TRAVEL,1041,78,0.074928,False
+recommendation,Recommendations,BAP,1627366,109171,0.067084,True
+search,Search,JOB,484824,40878,0.084315,True
+search,Search,BOAT,804435,81669,0.101523,True
