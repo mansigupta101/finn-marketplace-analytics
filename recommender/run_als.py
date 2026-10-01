@@ -22,7 +22,7 @@ RESULTS = Path(__file__).resolve().parents[1] / "analysis" / "results"
 
 FACTORS = [128, 256]
 REGULARIZATIONS = [0.01]
-ALPHAS = [10.0, 40.0, 100.0]
+ALPHAS = [0.1, 1.0, 10.0, 50.0, 100.0, 300.0, 400.0, 500.0]
 
 
 def score_top10(model, matrix, all_users, all_items, user_index,

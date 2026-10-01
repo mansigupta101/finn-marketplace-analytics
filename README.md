@@ -79,14 +79,14 @@ Full results: [`analysis/results/experiment_report.md`](analysis/results/experim
 | **Setup** | Buyers are split by hash into train (70%), validation (10%) and test (20%); buyers with 5 or fewer interactions always train. The first 5 interactions are known; later clicks are the labels. Test: 22,349 buyers. |
 | **Models** | **ALS** retrieves 200 candidates per buyer (256 factors, alpha 300, chosen by NDCG@10 on validation). **LightGBM** (lambdarank) re-orders them into a top 10 using ALS score, popularity, category match, county match and search share. |
 | **Rule-based baselines** | Popularity (most-clicked listings) and category popularity (most-clicked in the buyer's top category). Not models. |
-| **Option A, dropped** | A LightGBM trained on listings FINN showed (clicked vs skipped) was worse than ALS on the candidate shortlist (different population) and, in FINN's own slates, no measurably better than FINN's order (+0.002 NDCG). |
+| **Option A, dropped** | A LightGBM trained on listings FINN showed (clicked vs skipped) was worse than ALS on the candidate shortlist (different population) and, in FINN's own slates, no measurably better than FINN's order (+0.001 NDCG). |
 | **Settings frozen** | All tuning on validation only; test scored once. |
 
 **Results on test buyers** (hit@10 = share of buyers whose next click is in their top 10):
 
 | Popularity | Category popularity | ALS | LightGBM option A | **ALS + LightGBM (B)** |
 |---|---|---|---|---|
-| 0.38% | 0.47% | 4.76% | 1.19% | **5.36%** |
+| 0.38% | 0.47% | 4.76% | 1.59% | **5.36%** |
 
 **B minus ALS** (paired by buyer, 95% interval):
 
@@ -98,7 +98,7 @@ Full results: [`analysis/results/experiment_report.md`](analysis/results/experim
 
 | FINN order | Random | Popularity | ALS score | Option A |
 |---|---|---|---|---|
-| 0.5160 | 0.4967 | 0.5286 | 0.5205 | 0.5182 |
+| 0.5160 | 0.5001 | 0.5286 | 0.5205 | 0.5172 |
 
 **Beyond accuracy** (table `mart_rec_beyond_accuracy`, also in Snowflake): B covers the largest share
 of listings and leans least on the top 1% most-clicked. About 1.3% of buyers get a popularity
@@ -106,10 +106,14 @@ fallback list.
 
 **Conclusion.** ALS with LightGBM re-ordering is the best recommender on real clicks. It is about
 11 times better than the baselines and beats ALS alone on every metric, with intervals above zero:
-a relative gain of about 13% in hit@10. The absolute gain is small, and the evidence is offline, so
-this **justifies a live A/B test, not a launch.** Test design follows Part 2: buyers randomised
-50/50, click-through on recommendations as the primary metric, overall clicking as the guardrail,
-and a sample size set from the precision the guardrail needs. Error analysis by buyer activity,
+a relative gain of about 13% in hit@10. B's gain is concentrated in niche listings and real estate.
+It is slightly worse than ALS for buyers with one early click or whose next click is an already
+popular listing. 34% of buyers click a listing no one clicked early, which no recommender can find.
+The absolute gain is small, and the evidence is offline, so this **justifies a live A/B test, not a
+launch.** The test would follow the method of the simulated A/B test earlier in this README
+([Part 2](#part-2-ab-test-of-the-recommended-listing-boost-simulated)): buyers randomised 50/50,
+click-through on recommendations as the primary metric, overall clicking as the guardrail, and a
+sample size set from the precision the guardrail needs. Error analysis by buyer activity,
 category and target popularity: [`analysis/recommender_results.ipynb`](analysis/recommender_results.ipynb).
 Full write-up: [`docs/recommendation.md`](docs/recommendation.md).
 
