@@ -42,7 +42,7 @@ An **ALS candidate retriever + LightGBM ranker** predicts a buyer's next clicked
 
 The two-stage model improved hit@10 by **0.60 percentage points** over ALS (95% CI: 0.41–0.78). This supports **testing the model live**, not deploying it based on offline metrics alone.
 
-[Model evaluation](analysis/recommender_results.ipynb) · [Recommendation methodology](docs/recommendation.md)
+[Model evaluation](analysis/recommender_results.ipynb) · [Recommendation pipeline & methodology](analysis/recommender_pipeline.ipynb)
 
 ## Data pipeline
 
