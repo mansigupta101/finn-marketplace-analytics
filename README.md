@@ -11,15 +11,6 @@ Two kinds of data were used, kept strictly apart:
   and contacts simulated from a click model calibrated on the real data. Results validate the
   analysis method. They are not findings about FINN.
 
-## Status
-
-| Part | Content | Status |
-|---|---|---|
-| 1 | Real data: loading, data quality, dbt models, findings | Done |
-| 2 | Simulated A/B test of the recommended-listing boost, with validation | Done |
-| 3 | Recommender (ALS + LightGBM) evaluated on real clicks | Done |
-| Dashboard | Tableau Public dashboards | In progress |
-
 ## Part 1: Findings from the real data
 
 Random 5% sample of users: 113,404 buyers and 1,862,954 slates (search pages and recommendation
